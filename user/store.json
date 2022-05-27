@@ -1,1 +1,1 @@
-[{"name":"","inventory":{"maxSize":10,"items":[]}},{"name":"Bob"},"Jim",{"name":"Susie","inventory":{"maxSize":10,"items":[]}}]
+{"James":{"name":"James","inventory":{"maxSize":10,"items":[]},"history":[]},"Bob":{"name":"Bob","inventory":{"maxSize":10,"items":[]},"history":[]}}

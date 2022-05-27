@@ -1,3 +1,4 @@
+const { get } = require('http')
 const readline = require('readline')
 const user = require('./user/user')
 
@@ -31,8 +32,12 @@ const userInterface = (input) => {
         } else if (input === 'load') {
             gameState.player = "load"
             display("Enter user name to load")
+        } else if (input === 'list'){
+            display("These are the users I have")
+            userManager({ type: "list"})
+            display("'load', 'new' or 'list'")
         } else {
-            display("please enter 'load' or 'new'")
+            display("please enter 'load', 'new' or 'list'")
         }
     } else if (gameState.player === 'new') {
         if (typeof (input) === "string") {
@@ -46,12 +51,21 @@ const userInterface = (input) => {
         }
     } else if (gameState.player === 'load') {
         display(`loading ${input}`)
+        user = userManager({"type": get, "user":{"name": input}})
+        if (user) {
+            gameState.player = user
+            gameState.mode = 1
+        } else {
+            display("invalid user")
+            gameState.player = ''
+            display("'load', 'new' or 'list'")
+        }
     }
 }
 
 const play = () => {
     display("Now playing")
-    display("Welcome! Load user or create new?\n(load\\new)")
+    display("Welcome! Load user or create new?\n(load\\new\\list)")
     rl.prompt()
     rl.on('line', (line) => {
         if (line === 'quit' || line === 'exit') {
